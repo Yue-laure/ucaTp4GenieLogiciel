@@ -1,5 +1,4 @@
-package reservation;
+package GestionReservation;
 
 public class Reservation {
-
 }
