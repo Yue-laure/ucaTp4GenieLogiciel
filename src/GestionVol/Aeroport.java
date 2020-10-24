@@ -6,6 +6,7 @@ import java.util.List;
 public class Aeroport {
     private String nom;
     private Ville ville;
+    public List<Ville> dessert = new ArrayList<Ville>();
     
     public Aeroport(String nom, Ville ville){
         this.setNom(nom);
