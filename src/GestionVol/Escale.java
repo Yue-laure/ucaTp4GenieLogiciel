@@ -45,4 +45,12 @@ public class Escale {
 	public void setDate_atterrissage(ZonedDateTime date_atterrissage) {
 		this.date_atterrissage = date_atterrissage;
 	}
+	public enum EtatVol {
+		 ANNULE,
+		 RETARDE,
+		 ARCHIVE,
+		 AHEURE;
+		} 
+
 }
+
