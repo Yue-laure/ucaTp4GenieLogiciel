@@ -7,6 +7,7 @@ public class Passager {
         this.nom = nom;
     }
 
+    //Getters
     public String getNom() {
         return nom;
     }

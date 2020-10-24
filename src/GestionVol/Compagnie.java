@@ -18,8 +18,6 @@ public class Compagnie {
     public Compagnie() {}
 
 
-
-
     //Getters & Setters
     public String getNom() {
         return nom;

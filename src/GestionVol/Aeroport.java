@@ -13,6 +13,7 @@ public class Aeroport {
         this.ville=ville;
     }
 
+    //Getters & Setters
 	public String getNom() {
 		return nom;
 	}

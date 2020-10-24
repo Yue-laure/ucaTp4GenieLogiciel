@@ -2,9 +2,8 @@ package GestionVol;
 
 public class Ville {
     private String nom;
-    private Aeroport aeroport;
-    
-    
+
+    //Getters
 	public String getNom() {
 		return nom;
 	}
