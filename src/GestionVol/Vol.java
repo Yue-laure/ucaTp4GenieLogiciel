@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class Vol {
     private String numero;
-    private Compagnie compagnie;
+    private Compagnie compagnie=null;
     private ZonedDateTime date_depart;
     private ZonedDateTime date_arrivee;
     private Aeroport depart;
@@ -15,7 +15,7 @@ public class Vol {
     private HashMap<Integer, Escale> escales = new HashMap<>();
 
 
-    public Vol(String numero, Compagnie compagnie, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee, HashMap<Integer, Escale> escales) {
+    public Vol( Compagnie compagnie,String numero, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee, HashMap<Integer, Escale> escales) {
         this.numero = numero;
         this.compagnie = compagnie;
         this.date_depart = date_depart;
@@ -23,17 +23,27 @@ public class Vol {
         this.depart = depart;
         this.arrivee = arrivee;
         this.escales = escales;
+        compagnie.addVol(this);
+
     }
-    public Vol(String numero, Compagnie compagnie, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee) {
+    public Vol( Compagnie compagnie,String numero, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee) {
         this.numero = numero;
         this.compagnie = compagnie;
         this.date_depart = date_depart;
         this.date_arrivee = date_arrivee;
         this.depart = depart;
         this.arrivee = arrivee;
+        compagnie.addVol(this);
+
+    }
+    public Vol(Compagnie compagnie,String numero) {
+        this.numero = numero;
+        this.compagnie = compagnie;
+        compagnie.addVol(this);
     }
     public Vol(Compagnie compagnie) {
         this.compagnie = compagnie;
+        compagnie.addVol(this);
     }
     public Vol() {}
 
@@ -52,6 +62,7 @@ public class Vol {
 
     public void setCompagnie(Compagnie compagnie) {
         this.compagnie = compagnie;
+        compagnie.addVol(this);
     }
 
     public HashMap<Integer, Escale> getEscales() {
@@ -94,4 +105,9 @@ public class Vol {
         this.arrivee = arrivee;
     }
 
+    @Override
+    public String toString() {
+        return "Vol de " + compagnie+
+                " numero " + numero;
+    }
 }
