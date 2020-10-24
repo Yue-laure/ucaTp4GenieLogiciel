@@ -8,11 +8,13 @@ public class Escale {
     private ZonedDateTime date_atterrissage;
     private ZonedDateTime date_decollage;
     private Aeroport aeroport;
+    private Vol vol;
 
-    public Escale(ZonedDateTime date_atterrissage, ZonedDateTime date_decollage, Aeroport aeroport) {
+    public Escale(ZonedDateTime date_atterrissage, ZonedDateTime date_decollage, Aeroport aeroport,Vol vol) {
         this.date_atterrissage = date_atterrissage;
         this.date_decollage = date_decollage;
         this.aeroport = aeroport;
+        this.vol=vol;
     }
 
     //Getters

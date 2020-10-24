@@ -15,6 +15,7 @@ public class Reservation {
     private Passager passager;
     private Client client;
     private Vol vol;
+    private boolean confirmation=false;
     private static List<Reservation> reservations = new ArrayList<>();
 
 
@@ -41,6 +42,14 @@ public class Reservation {
         Reservation.reservations.add(this);
         client.addReservation(this);
     }
+
+    public void confirmer() {
+        confirmation=true;
+    }
+	
+	void annuler() {	
+        //... 
+	}
 
 
     //Getters & Setters
