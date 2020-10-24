@@ -36,13 +36,16 @@ public class Compagnie {
     public void setVols(List<Vol> vols) {
         this.vols = vols;
         for (Vol vol: vols) {
-            vol.setCompagnie(this);
+            vol.setCompagnieFromCompagnieClass(this);
         }
     }
 
     public void addVol(Vol vol) {
         this.vols.add(vol);
-        vol.setCompagnie(this);
+        vol.setCompagnieFromCompagnieClass(this);
+    }
+    public void addVolFromVolClass(Vol vol) {
+        this.vols.add(vol);
     }
 
     @Override

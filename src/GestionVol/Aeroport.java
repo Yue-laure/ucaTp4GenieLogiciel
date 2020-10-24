@@ -10,7 +10,6 @@ public class Aeroport {
     public Aeroport(String nom, Ville ville){
         this.nom = nom;
         this.ville=ville;
-
     }
 
 }
