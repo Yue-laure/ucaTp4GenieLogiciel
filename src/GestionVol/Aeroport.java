@@ -9,8 +9,9 @@ public class Aeroport {
     public List<Ville> dessert = new ArrayList<Ville>();
     
     public Aeroport(String nom, Ville ville){
-        this.nom = nom;
-        this.ville=ville;
+        this.setNom(nom);
+        this.setVille(ville);
+
     }
 
     //Getters & Setters
@@ -29,5 +30,8 @@ public class Aeroport {
 	public void setVille(Ville ville) {
 		this.ville = ville;
 	}
-
+	void afficher() {
+		 
+		 } 
 }
+
