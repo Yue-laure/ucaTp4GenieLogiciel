@@ -22,6 +22,7 @@ public class Start {
         Vol vol3 = new Vol(RAM,"1");
 
         //Reservation res=new Reservation();
+        System.out.println("hey Yue <3");
 
         System.out.println("VOL");
         System.out.println("vol a :"+vol1.getDate_depart());

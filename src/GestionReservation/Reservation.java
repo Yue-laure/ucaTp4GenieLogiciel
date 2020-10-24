@@ -18,7 +18,6 @@ public class Reservation {
     private static List<Reservation> reservations = new ArrayList<>();
 
 
-
     public Reservation(Client client,Passager passager,Vol vol) {
         next++;
         this.numero = String.valueOf(next);
