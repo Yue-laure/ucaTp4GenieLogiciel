@@ -1,15 +1,26 @@
 package GestionVol;
 
-public class Aeroport {
+import java.util.ArrayList;
+import java.util.List;
+
+public  class Aeroport implements Comparable<Aeroport> {
     private String nom;
+    
     private Ville ville;
+    private List<Escale> escales = new ArrayList<Escale>();
+    
+    public Aeroport(String nom, Ville ville){
+        this.setNom(nom);
+        this.setVille(ville);
 
-	public Aeroport(String nom, Ville ville) {
-		this.nom = nom;
-		this.ville = ville;
+    }
+    public Aeroport(String nom) {
+    	this.setNom(nom);
 	}
-
-	//Getters & Setters
+	public int compareTo(Aeroport aeroport) {//ordered
+		return 0;}
+    
+    //Getters & Setters
 	public String getNom() {
 		return nom;
 	}
@@ -25,6 +36,7 @@ public class Aeroport {
 	public void setVille(Ville ville) {
 		this.ville = ville;
 	}
-
+	void afficher() {
+		 
+		 } 
 }
-

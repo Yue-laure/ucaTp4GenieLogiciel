@@ -3,8 +3,13 @@ package GestionVol;
 
 import GestionReservation.Reservation;
 import GestionVol.Escale.EtatVol;
+
+import java.sql.Date;
+import java.sql.Time;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.Vector;
 
 public class Vol {
@@ -12,19 +17,21 @@ public class Vol {
     private Compagnie compagnie=null;
     private ZonedDateTime date_depart;
     private ZonedDateTime date_arrivee;
+    
     private Aeroport depart;
     private Aeroport arrivee;
-    private Vector<Escale>escales;
-    private Vector<Reservation>reservations; 
+    private Set<Aeroport> escales = new TreeSet<Aeroport>();
+    private Vector<Reservation>reservations;
+    
     private EtatVol etatVol; 
 
-    public Vol(Compagnie campagnie, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee, Compagnie compagnie) {
+    public Vol(Compagnie compagnie, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee) {
     	this.compagnie=compagnie;
         this.date_depart = date_depart;
         this.date_arrivee = date_arrivee;
         this.depart = depart;
         this.arrivee = arrivee;
-        escales =new Vector<Escale>();
+        escales =new TreeSet<Aeroport>();
         reservations=new Vector<Reservation>(); 
         setEtatVol(EtatVol.AHEURE);//constante AHEURE de l'ensemble <enum> 
     }
@@ -48,11 +55,18 @@ public class Vol {
         this.compagnie = compagnie;
         compagnie.addVolFromVolClass(this);
     }
+    public Vol(String numero) {
+    	this.numero = numero;
+    }
     public Vol() {}
     
-    public void ajouterEscale(Aeroport aeroport,int duree ,ZonedDateTime date_depart, ZonedDateTime date_arrivee) {
+    public Vol(Compagnie c1, Date d1, Date d12, Time t1, Time t2, Aeroport aeroport1, Aeroport aeroport2) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void ajouterEscale(Aeroport aeroport,int duree ,ZonedDateTime date_depart, ZonedDateTime date_arrivee) {
     	Escale e=new Escale(aeroport,duree,date_depart,date_arrivee);
-    	escales.add(e); 
+    	escales.add(e.getAeroport()); 
    }
 
 	//methods navigabilite
@@ -64,8 +78,23 @@ public class Vol {
     /*public void addReservationFromReservationClass(Reservation res) {
         this.reservations.add(res);
     }*/
-
-
+	public void afficher()
+	{ System.out.println(" "+this.depart.getNom()+
+	 " "+this.date_arrivee+
+	 " "+this.arrivee.getNom()+
+	 		// ajouter les autres champs
+	 " "+this.etatVol.toString()//print peut imprimer l'objet
+				);
+		for (Aeroport e:this.escales)
+			{ e.afficher();}
+		for (Reservation r:this.reservations)
+			{ r.afficher(); }
+	 }
+	public void reserver(String i) {
+	 {	Reservation r=new Reservation(i,this);// son vol est this
+	 	this.reservations.add(r);
+	 } 
+	 }
 
     //Getters & Setters
     public String getNumero() {
@@ -88,13 +117,7 @@ public class Vol {
         this.compagnie = compagnie;
     }
 
-    public Vector<Escale> getEscales() {
-        return escales;
-    }
 
-    public void setEscales(Vector<Escale> escales) {
-        this.escales = escales;
-    }
     public Vector<Reservation> getReservations() {
         return reservations;
     }
