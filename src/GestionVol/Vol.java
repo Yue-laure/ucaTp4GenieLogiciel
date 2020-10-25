@@ -2,12 +2,10 @@ package GestionVol;
 
 
 import GestionReservation.Reservation;
-
+import GestionVol.Escale.EtatVol;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.Vector;
 
 public class Vol {
     private String numero;
@@ -16,21 +14,21 @@ public class Vol {
     private ZonedDateTime date_arrivee;
     private Aeroport depart;
     private Aeroport arrivee;
-    private HashMap<Integer, Escale> escales = new HashMap<>();
-    private List<Reservation> reservations = new ArrayList<>();
+    private Vector<Escale>escales;
+    private Vector<Reservation>reservations; 
+    private EtatVol etatVol; 
 
-
-    public Vol( Compagnie compagnie,String numero, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee, HashMap<Integer, Escale> escales) {
-        this.numero = numero;
-        this.compagnie = compagnie;
+    public Vol(Compagnie campagnie, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee, Compagnie compagnie) {
+    	this.compagnie=compagnie;
         this.date_depart = date_depart;
         this.date_arrivee = date_arrivee;
         this.depart = depart;
         this.arrivee = arrivee;
-        this.escales = escales;
-        compagnie.addVolFromVolClass(this);
-
+        escales =new Vector<Escale>();
+        reservations=new Vector<Reservation>(); 
+        setEtatVol(EtatVol.AHEURE);//constante AHEURE de l'ensemble <enum> 
     }
+    
     public Vol( Compagnie compagnie,String numero, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee) {
         this.numero = numero;
         this.compagnie = compagnie;
@@ -51,9 +49,13 @@ public class Vol {
         compagnie.addVolFromVolClass(this);
     }
     public Vol() {}
+    
+    public void ajouterEscale(Aeroport aeroport,int duree ,ZonedDateTime date_depart, ZonedDateTime date_arrivee) {
+    	Escale e=new Escale(aeroport,duree,date_depart,date_arrivee);
+    	escales.add(e); 
+   }
 
-
-    //methods navigabilite
+	//methods navigabilite
 
     public void addReservation(Reservation res) {
         this.reservations.add(res);
@@ -62,7 +64,6 @@ public class Vol {
     /*public void addReservationFromReservationClass(Reservation res) {
         this.reservations.add(res);
     }*/
-
 
 
 
@@ -87,12 +88,19 @@ public class Vol {
         this.compagnie = compagnie;
     }
 
-    public HashMap<Integer, Escale> getEscales() {
+    public Vector<Escale> getEscales() {
         return escales;
     }
 
-    public void setEscales(HashMap<Integer, Escale> escales) {
+    public void setEscales(Vector<Escale> escales) {
         this.escales = escales;
+    }
+    public Vector<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Vector<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     public String getDate_depart() {
@@ -134,10 +142,19 @@ public class Vol {
     public void setArrivee(Aeroport arrivee) {
         this.arrivee = arrivee;
     }
+	public EtatVol getEtatVol() {
+		return etatVol;
+	}
+
+	public void setEtatVol(EtatVol etatVol) {
+		this.etatVol = etatVol;
+	}
 
     @Override
     public String toString() {
         return "Vol de " + compagnie+
                 " numero " + numero;
     }
+
+
 }
