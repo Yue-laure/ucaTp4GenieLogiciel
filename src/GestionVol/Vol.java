@@ -10,38 +10,35 @@ public class Vol {
     private String numero;
     private Compagnie compagnie=null;
     private EtatVol etatVol;
+    private Trajet trajet;
 
-    private Aeroport depart;
-    private Aeroport arrivee;
 
     private ZonedDateTime date_depart;
     private ZonedDateTime date_arrivee;
 
-    private ArrayList<Escale> escales = new ArrayList<>();
     private ArrayList<Reservation> reservations = new ArrayList<>();
 
 
-    public Vol( Compagnie compagnie,String numero, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee) {
+    public Vol( Compagnie compagnie,String numero, ZonedDateTime date_depart, ZonedDateTime date_arrivee,Trajet trajet) {
         this.numero = numero;
         this.compagnie = compagnie;
         this.date_depart = date_depart;
         this.date_arrivee = date_arrivee;
-        this.depart = depart;
-        this.arrivee = arrivee;
+        this.trajet=trajet;
         setEtatVol(EtatVol.AHEURE);//Vol par defaut AHEURE
         compagnie.addVolFromVolClass(this);
     }
-    public Vol( Compagnie compagnie,String numero, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee,ArrayList<Escale> escales) {
-        this.numero = numero;
-        this.compagnie = compagnie;
-        this.date_depart = date_depart;
-        this.date_arrivee = date_arrivee;
-        this.depart = depart;
-        this.arrivee = arrivee;
-        this.escales=escales;
-        setEtatVol(EtatVol.AHEURE);//Vol par defaut AHEURE
-        compagnie.addVolFromVolClass(this);
-    }
+//    public Vol( Compagnie compagnie,String numero, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee,ArrayList<Escale> escales) {
+//        this.numero = numero;
+//        this.compagnie = compagnie;
+//        this.date_depart = date_depart;
+//        this.date_arrivee = date_arrivee;
+//        this.depart = depart;
+//        this.arrivee = arrivee;
+//        this.escales=escales;
+//        setEtatVol(EtatVol.AHEURE);//Vol par defaut AHEURE
+//        compagnie.addVolFromVolClass(this);
+//    }
     /*
     public Vol(Compagnie compagnie,String numero) {
         this.numero = numero;
@@ -58,17 +55,11 @@ public class Vol {
     public Vol() {}
     */
 
-    public void addEscale(ZonedDateTime date_atterrissage,Aeroport aeroport, ZonedDateTime date_decollage) {
-        Escale esc=new Escale(this, date_atterrissage, aeroport, date_decollage);
-
-    }
-    public void addEscale(Escale e) {
-        e.setVol(this);
-        this.escales.add(e);
-    }
-    public void addEscalefromEscaleClass(Escale e) {
-        this.escales.add(e);
-    }
+//    public void addEscale(ZonedDateTime date_atterrissage,Aeroport aeroport, ZonedDateTime date_decollage) {
+//        Escale esc=new Escale(this, date_atterrissage, aeroport, date_decollage);
+//
+//    }
+    
     public void addReservation(Reservation res) {
         res.setVol(this);
         this.reservations.add(res);
@@ -160,17 +151,17 @@ public class Vol {
 	public void setEtatVol(EtatVol etatVol) {
 		this.etatVol = etatVol;
 	}
-    public void afficher() {
-        DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
-	    System.out.println("Vol de "+this.depart.getNom()+" "+this.date_depart.format(formatter)+
-                            "\nvers "+this.arrivee.getNom()+" "+this.date_arrivee.format(formatter)
-        );
-        for (Escale e:this.escales)
-        { System.out.println( e.afficher() );}
-        System.out.println(this.etatVol.toString());
-        for (Reservation r:this.reservations)
-        { System.out.println( r.afficher() );}
-}
+//    public void afficher() {
+//        DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
+//	    System.out.println("Vol de "+this.depart.getNom()+" "+this.date_depart.format(formatter)+
+//                            "\nvers "+this.arrivee.getNom()+" "+this.date_arrivee.format(formatter)
+//        );
+//        for (Escale e:this.escales)
+//        { System.out.println( e.afficher() );}
+//        System.out.println(this.etatVol.toString());
+//        for (Reservation r:this.reservations)
+//        { System.out.println( r.afficher() );}
+//}
     @Override
     public String toString() {
         return "Vol de " + compagnie+

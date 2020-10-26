@@ -3,6 +3,7 @@ import GestionReservation.Passager;
 import GestionReservation.Reservation;
 import GestionVol.*;
 
+import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
@@ -25,23 +26,28 @@ public class Start {
         ZonedDateTime dea=ZonedDateTime.of(2020, 01, 01, 10, 30, 0, 0, ZoneId.of("UTC"));
         ZonedDateTime ded=ZonedDateTime.of(2020, 01, 01, 11, 30, 0, 0, ZoneId.of("UTC"));
         ZonedDateTime da=ZonedDateTime.of(2020, 01, 01, 13, 30, 0, 0, ZoneId.of("UTC"));
+        
+        Duration dureeDepart =Duration.ofMinutes(0);
+        Duration dureeArrivee =Duration.ofHours(2);
+        
+  //*****      Trajet trajet1=new Trajet(CMN,PKX,dureeDepart,dureeArrivee);
 
-        Vol vol = new Vol(AF,"1",dd,da,CMN,PKX);
+   //****     Vol vol = new Vol(AF,"1",dd,da,trajet1);
 
         //vol.addEscale(dea,CDG,ded);
-        Escale escaleParis=new Escale(vol,dea,CDG,ded);
+      //****  Escale escaleParis=new Escale(vol,dea,CDG,ded);
 
         Client ayoub =new Client("ayoub");
         Passager yue =new Passager("Yue");
 
         //Reservation reservation1=new Reservation(ayoub,vol);
         //Reservation reservation2=new Reservation(ayoub,yue,vol);
-        ayoub.reserve(vol);
-        ayoub.reserve(yue,vol);
+ //****       ayoub.reserve(vol);
+  //****      ayoub.reserve(yue,vol);
         //ayoub.reserve("yue",vol);
 
 
-        vol.afficher();
+  //****      vol.afficher();
 
         
         //Reservation res=new Reservation();
