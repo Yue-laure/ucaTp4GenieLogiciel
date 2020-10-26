@@ -28,8 +28,9 @@ public class Start {
 
         Vol vol = new Vol(AF,"1",dd,da,CMN,PKX);
 
-        //vol.addEscale(dea,CDG,ded);
-        Escale escaleParis=new Escale(vol,dea,CDG,ded);
+        vol.addEscale(dea,CDG,ded);
+        vol.addEscale(dea,CDG,ded);
+        Escale escaleParis=new Escale(vol,dea,CMN,ded);
 
         Client ayoub =new Client("ayoub");
         Passager yue =new Passager("Yue");

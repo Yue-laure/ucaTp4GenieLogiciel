@@ -105,58 +105,62 @@ public class Vol {
     }
     */
 
+    public ArrayList<Escale> getEscales() {
+        return escales;
+    }
+
     /*
-    public ArrayList<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(ArrayList<Reservation> reservations) {
-        this.reservations = reservations;
-    }
-
-    public String getDate_depart() {
-        if (date_depart!=null) {
-            DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
-            return date_depart.format(formatter);
+        public ArrayList<Reservation> getReservations() {
+            return reservations;
         }
-        return null;
-    }
 
-    public void setDate_depart(ZonedDateTime date_depart) {
-        this.date_depart = date_depart;
-    }
-
-    public String getDate_arrivee() {
-        if (date_arrivee!=null) {
-            DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
-            return date_arrivee.format(formatter);
+        public void setReservations(ArrayList<Reservation> reservations) {
+            this.reservations = reservations;
         }
-        return null;
-    }
 
-    public void setDate_arrivee(ZonedDateTime date_arrivee) {
-        this.date_arrivee = date_arrivee;
-    }
+        public String getDate_depart() {
+            if (date_depart!=null) {
+                DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
+                return date_depart.format(formatter);
+            }
+            return null;
+        }
 
-    public Aeroport getDepart() {
-        return depart;
-    }
+        public void setDate_depart(ZonedDateTime date_depart) {
+            this.date_depart = date_depart;
+        }
 
-    public void setDepart(Aeroport depart) {
-        this.depart = depart;
-    }
+        public String getDate_arrivee() {
+            if (date_arrivee!=null) {
+                DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
+                return date_arrivee.format(formatter);
+            }
+            return null;
+        }
 
-    public Aeroport getArrivee() {
-        return arrivee;
-    }
+        public void setDate_arrivee(ZonedDateTime date_arrivee) {
+            this.date_arrivee = date_arrivee;
+        }
 
-    public void setArrivee(Aeroport arrivee) {
-        this.arrivee = arrivee;
-    }
-	public EtatVol getEtatVol() {
-		return etatVol;
-	}
-    */
+        public Aeroport getDepart() {
+            return depart;
+        }
+
+        public void setDepart(Aeroport depart) {
+            this.depart = depart;
+        }
+
+        public Aeroport getArrivee() {
+            return arrivee;
+        }
+
+        public void setArrivee(Aeroport arrivee) {
+            this.arrivee = arrivee;
+        }
+        public EtatVol getEtatVol() {
+            return etatVol;
+        }
+        */
 	public void setEtatVol(EtatVol etatVol) {
 		this.etatVol = etatVol;
 	}
