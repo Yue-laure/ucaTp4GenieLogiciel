@@ -1,25 +1,24 @@
 package GestionVol;
 
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Escale {
     private ZonedDateTime date_atterrissage;
     private ZonedDateTime date_decollage;
-    
     private Aeroport aeroport;
     private Vol vol;
-    private int duree ; 
-    
-    public  Escale(Aeroport aeroport,int duree ,ZonedDateTime date_atterrissage,ZonedDateTime date_decollage)
-    { this.aeroport=aeroport;
-      this.setDuree(duree);
-      this.setDate_atterrissage(date_atterrissage);
-      this.setDate_decollage(date_decollage);
-      long d1=date_decollage.toInstant().getEpochSecond();
-      long d2=date_atterrissage.toInstant().getEpochSecond();
-      if(d2-d1>duree)
-    	  return  ;
-    } 
+
+    public  Escale(Vol vol,ZonedDateTime date_atterrissage,Aeroport aeroport,ZonedDateTime date_decollage)
+    {
+	  this.vol=vol;
+	  vol.addEscalefromEscaleClass(this);
+	  this.aeroport=aeroport;
+      this.date_atterrissage=date_atterrissage;
+      this.date_decollage=date_decollage;
+    }
+/*
 	public Aeroport getAeroport() {
 		return aeroport;
 	}
@@ -29,15 +28,17 @@ public class Escale {
 	public Vol getVol() {
 		return vol;
 	}
+	*/
 	public void setVol(Vol vol) {
 		this.vol = vol;
 	}
+	/*
 	public int getDuree() {
-		return duree;
+    	// la duree est calculer a partir du decollage-atterrissage
+		// attribue derivé .. pas besoin de l'ajouter comme attribut
+		return 0;
 	}
-	public void setDuree(int duree) {
-		this.duree = duree;
-	}
+
 	public ZonedDateTime getDate_decollage() {
 		return date_decollage;
 	}
@@ -50,15 +51,19 @@ public class Escale {
 	public void setDate_atterrissage(ZonedDateTime date_atterrissage) {
 		this.date_atterrissage = date_atterrissage;
 	}
-	public enum EtatVol {
-		 ANNULE,
-		 RETARDE,
-		 ARCHIVE,
-		 AHEURE;
-		} 
-	void afficher() {
-		 // à remplir
-		 } 
+*/
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(date_atterrissage, date_decollage, aeroport, vol);
+    }
+
+    public String afficher() {
+        DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
+        return "escale en "+this.aeroport.getNom()+" de "+this.date_atterrissage.format(formatter)+" a "+this.date_decollage.format(formatter);
+	}
+
+
 }
 
 

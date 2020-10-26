@@ -2,11 +2,10 @@ package GestionReservation;
 
 import GestionVol.Vol;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Client {
     private String nom;
-    private List<Reservation> reservations = new ArrayList<>();
+    private ArrayList<Reservation> reservations = new ArrayList<>();
 
     public Client(String nom) {
         this.nom = nom;
@@ -20,7 +19,14 @@ public class Client {
     public void reserve(Passager passager,Vol vol) {
         new Reservation(this,passager,vol);
     }
+    public void reserve(String nomPassager,Vol vol) {
+        new Reservation(this,new Passager(nomPassager),vol);
+    }
     public void addReservation(Reservation reservation) {
+        reservation.setClient(this);
+        this.reservations.add(reservation);
+    }
+    public void addReservationFromReservationClass(Reservation reservation) {
         this.reservations.add(reservation);
     }
 

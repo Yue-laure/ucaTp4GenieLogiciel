@@ -1,41 +1,26 @@
 package GestionVol;
 
-
 import GestionReservation.Reservation;
-import GestionVol.Escale.EtatVol;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.Vector;
+import java.util.*;
 
 public class Vol {
     private String numero;
     private Compagnie compagnie=null;
-    private ZonedDateTime date_depart;
-    private ZonedDateTime date_arrivee;
-    
+    private EtatVol etatVol;
+
     private Aeroport depart;
     private Aeroport arrivee;
-    private Set<Aeroport> escales = new TreeSet<Aeroport>();
-    private Vector<Reservation>reservations;
-    
-    private EtatVol etatVol; 
 
-    public Vol(Compagnie compagnie, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee) {
-    	this.compagnie=compagnie;
-        this.date_depart = date_depart;
-        this.date_arrivee = date_arrivee;
-        this.depart = depart;
-        this.arrivee = arrivee;
-        escales =new TreeSet<Aeroport>();
-        reservations=new Vector<Reservation>(); 
-        setEtatVol(EtatVol.AHEURE);//constante AHEURE de l'ensemble <enum> 
-    }
-    
+    private ZonedDateTime date_depart;
+    private ZonedDateTime date_arrivee;
+
+    private ArrayList<Escale> escales = new ArrayList<>();
+    private ArrayList<Reservation> reservations = new ArrayList<>();
+
+
     public Vol( Compagnie compagnie,String numero, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee) {
         this.numero = numero;
         this.compagnie = compagnie;
@@ -43,9 +28,21 @@ public class Vol {
         this.date_arrivee = date_arrivee;
         this.depart = depart;
         this.arrivee = arrivee;
+        setEtatVol(EtatVol.AHEURE);//Vol par defaut AHEURE
         compagnie.addVolFromVolClass(this);
-
     }
+    public Vol( Compagnie compagnie,String numero, ZonedDateTime date_depart, ZonedDateTime date_arrivee, Aeroport depart, Aeroport arrivee,ArrayList<Escale> escales) {
+        this.numero = numero;
+        this.compagnie = compagnie;
+        this.date_depart = date_depart;
+        this.date_arrivee = date_arrivee;
+        this.depart = depart;
+        this.arrivee = arrivee;
+        this.escales=escales;
+        setEtatVol(EtatVol.AHEURE);//Vol par defaut AHEURE
+        compagnie.addVolFromVolClass(this);
+    }
+    /*
     public Vol(Compagnie compagnie,String numero) {
         this.numero = numero;
         this.compagnie = compagnie;
@@ -59,44 +56,37 @@ public class Vol {
     	this.numero = numero;
     }
     public Vol() {}
-    
-    public Vol(Compagnie c1, Date d1, Date d12, Time t1, Time t2, Aeroport aeroport1, Aeroport aeroport2) {
-		// TODO Auto-generated constructor stub
-	}
+    */
 
-	public void ajouterEscale(Aeroport aeroport,int duree ,ZonedDateTime date_depart, ZonedDateTime date_arrivee) {
-    	Escale e=new Escale(aeroport,duree,date_depart,date_arrivee);
-    	escales.add(e.getAeroport()); 
-   }
+    public void addEscale(ZonedDateTime date_atterrissage,Aeroport aeroport, ZonedDateTime date_decollage) {
+        Escale esc=new Escale(this, date_atterrissage, aeroport, date_decollage);
 
-	//methods navigabilite
-
-    public void addReservation(Reservation res) {
-        this.reservations.add(res);
-        //res.setCompagnieFromCompagnieClass(this);
     }
-    /*public void addReservationFromReservationClass(Reservation res) {
+    public void addEscale(Escale e) {
+        e.setVol(this);
+        this.escales.add(e);
+    }
+    public void addEscalefromEscaleClass(Escale e) {
+        this.escales.add(e);
+    }
+    public void addReservation(Reservation res) {
+        res.setVol(this);
         this.reservations.add(res);
-    }*/
-	public void afficher()
-	{ System.out.println(" "+this.depart.getNom()+
-	 " "+this.date_arrivee+
-	 " "+this.arrivee.getNom()+
-	 		// ajouter les autres champs
-	 " "+this.etatVol.toString()//print peut imprimer l'objet
-				);
-		for (Aeroport e:this.escales)
-			{ e.afficher();}
-		for (Reservation r:this.reservations)
-			{ r.afficher(); }
-	 }
-	public void reserver(String i) {
-	 {	Reservation r=new Reservation(i,this);// son vol est this
-	 	this.reservations.add(r);
-	 } 
-	 }
+    }
+    public void addReservationFromReservationClass(Reservation res) {
+        this.reservations.add(res);
+    }
+
+
+    public enum EtatVol {
+        ANNULE,
+        RETARDE,
+        ARCHIVE,
+        AHEURE;
+    }
 
     //Getters & Setters
+    /*
     public String getNumero() {
         return numero;
     }
@@ -113,16 +103,14 @@ public class Vol {
         this.compagnie = compagnie;
         compagnie.addVolFromVolClass(this);
     }
-    public void setCompagnieFromCompagnieClass(Compagnie compagnie) {
-        this.compagnie = compagnie;
-    }
+    */
 
-
-    public Vector<Reservation> getReservations() {
+    /*
+    public ArrayList<Reservation> getReservations() {
         return reservations;
     }
 
-    public void setReservations(Vector<Reservation> reservations) {
+    public void setReservations(ArrayList<Reservation> reservations) {
         this.reservations = reservations;
     }
 
@@ -168,16 +156,28 @@ public class Vol {
 	public EtatVol getEtatVol() {
 		return etatVol;
 	}
-
+    */
 	public void setEtatVol(EtatVol etatVol) {
 		this.etatVol = etatVol;
 	}
-
+    public void afficher() {
+        DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
+	    System.out.println("Vol de "+this.depart.getNom()+" "+this.date_depart.format(formatter)+
+                            "\nvers "+this.arrivee.getNom()+" "+this.date_arrivee.format(formatter)
+        );
+        for (Escale e:this.escales)
+        { System.out.println( e.afficher() );}
+        System.out.println(this.etatVol.toString());
+        for (Reservation r:this.reservations)
+        { System.out.println( r.afficher() );}
+}
     @Override
     public String toString() {
         return "Vol de " + compagnie+
                 " numero " + numero;
     }
-
+    public void setCompagnieFromCompagnieClass(Compagnie compagnie) {
+        this.compagnie = compagnie;
+    }
 
 }

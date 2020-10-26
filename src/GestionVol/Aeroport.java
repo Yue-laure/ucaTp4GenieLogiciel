@@ -3,24 +3,22 @@ package GestionVol;
 import java.util.ArrayList;
 import java.util.List;
 
-public  class Aeroport implements Comparable<Aeroport> {
+public  class Aeroport {
     private String nom;
-    
     private Ville ville;
     private List<Escale> escales = new ArrayList<Escale>();
     
     public Aeroport(String nom, Ville ville){
-        this.setNom(nom);
-        this.setVille(ville);
+        this.nom=nom;
+        this.ville=ville;
 
     }
-    public Aeroport(String nom) {
-    	this.setNom(nom);
-	}
-	public int compareTo(Aeroport aeroport) {//ordered
-		return 0;}
+	public boolean equals(Aeroport aeroport) {//unique
+    	if (this.nom.equals(aeroport.nom)){ return true; }
+		return false;}
     
     //Getters & Setters
+
 	public String getNom() {
 		return nom;
 	}
@@ -36,7 +34,9 @@ public  class Aeroport implements Comparable<Aeroport> {
 	public void setVille(Ville ville) {
 		this.ville = ville;
 	}
+	/*
 	void afficher() {
 		 
-		 } 
+		 }
+	 */
 }

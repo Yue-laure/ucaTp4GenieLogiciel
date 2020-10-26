@@ -1,15 +1,18 @@
 package GestionReservation;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Passager {
     private String nom;
-    private List<Reservation> reservations = new ArrayList<>();
+    private ArrayList<Reservation> reservations = new ArrayList<>();
+
     public Passager(String nom) {
         this.nom = nom;
     }
-
+    public void addReservationFromReservationClass(Reservation reservation) {
+        this.reservations.add(reservation);
+    }
     //Getters
     public String getNom() {
         return nom;

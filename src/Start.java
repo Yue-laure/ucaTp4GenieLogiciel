@@ -1,43 +1,48 @@
-import GestionVol.Aeroport;
-import GestionVol.Compagnie;
-import GestionVol.Ville;
-import GestionVol.Vol;
+import GestionReservation.Client;
+import GestionReservation.Passager;
+import GestionReservation.Reservation;
+import GestionVol.*;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-
-import GestionReservation.Reservation;
 
 public class Start {
     public static void main(String[] args) {
         Compagnie AF = new Compagnie("AIR FRANCE");
         Compagnie RAM = new Compagnie("Royal Air Maroc");
-        Compagnie AA=new Compagnie("airAlgérie");
-        ZonedDateTime dd1=ZonedDateTime.of(2020, 01, 01, 10, 30, 0, 0, ZoneId.of("UTC"));
-        ZonedDateTime da1=ZonedDateTime.of(2020, 01, 01, 13, 30, 0, 0, ZoneId.of("UTC"));
-        Ville ville1=new Ville("Oran");
-        Ville ville2=new Ville("Constantine");
-        Ville ville3=new Ville("Alger");
-        ville1.ajouterAeroport("ahmed BenBella");
-        ville2.ajouterAeroport("Mohamed Boudiaf");
-        ville3.ajouterAeroport("Boulmediane");
-        Aeroport CMN=new Aeroport("CMN",new Ville("Casablanca"));
-        Aeroport CDG=new Aeroport("CDG",new Ville("Paris"));
-        Vol vol1 = new Vol(AF,"1",dd1,da1,CMN,CDG);
-        Vol vol2 = new Vol(AF,"2");
-        Vol vol3 = new Vol(RAM,"1");
-        Aeroport aeroport1;
-        Aeroport aeroport2;
-        
-        aeroport1=ville1.getAeroports().get(0);// le premier aeroport de la ville Oran
-        aeroport2=ville2.getAeroports().get(0);// le premier aeroport de constantine 
-        Vol vol = new Vol(AA,dd1,da1,aeroport1,aeroport2);
-        vol.ajouterEscale(ville3.getAeroports().get(0),1,dd1,da1); //les declarer avant, 
+        Compagnie AC=new Compagnie("AIR CHINA");
+
+        Ville casablanca=new Ville("Casablanca");   //Mohammed V
+        Ville paris=new Ville("Paris");             //Paris Charles de Gaulle
+        Ville pekin=new Ville("Pekin");             //Pekin Daxing
+
+        Aeroport CMN=new Aeroport("CMN",casablanca);
+        Aeroport CDG=new Aeroport("CDG",paris);
+        Aeroport PKX=new Aeroport("PKX",pekin);
+
+
+        ZonedDateTime dd=ZonedDateTime.of(2020, 01, 01, 07, 30, 0, 0, ZoneId.of("UTC"));
+        ZonedDateTime dea=ZonedDateTime.of(2020, 01, 01, 10, 30, 0, 0, ZoneId.of("UTC"));
+        ZonedDateTime ded=ZonedDateTime.of(2020, 01, 01, 11, 30, 0, 0, ZoneId.of("UTC"));
+        ZonedDateTime da=ZonedDateTime.of(2020, 01, 01, 13, 30, 0, 0, ZoneId.of("UTC"));
+
+        Vol vol = new Vol(AF,"1",dd,da,CMN,PKX);
+
+        //vol.addEscale(dea,CDG,ded);
+        Escale escaleParis=new Escale(vol,dea,CDG,ded);
+
+        Client ayoub =new Client("ayoub");
+        Passager yue =new Passager("Yue");
+
+        //Reservation reservation1=new Reservation(ayoub,vol);
+        //Reservation reservation2=new Reservation(ayoub,yue,vol);
+        ayoub.reserve(vol);
+        ayoub.reserve(yue,vol);
+        //ayoub.reserve("yue",vol);
+
+
         vol.afficher();
-        vol.reserver("12");
-        vol.reserver("13"); 
-        vol.afficher();
-        vol.getReservations().get(1).confirmer();
+
         
         //Reservation res=new Reservation();
         
