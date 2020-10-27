@@ -12,14 +12,12 @@ public class Vol {
     private EtatVol etatVol;
     private Trajet trajet;
 
-
     private ZonedDateTime date_depart;
     private ZonedDateTime date_arrivee;
-
     private ArrayList<Reservation> reservations = new ArrayList<>();
 
 
-    public Vol( Compagnie compagnie,String numero, ZonedDateTime date_depart, ZonedDateTime date_arrivee,Trajet trajet) {
+    public Vol( Compagnie compagnie,String numero, ZonedDateTime date_depart,ZonedDateTime date_arrivee, Trajet trajet) {
         this.numero = numero;
         this.compagnie = compagnie;
         this.date_depart = date_depart;
@@ -96,9 +94,12 @@ public class Vol {
     }
     */
 
+    /*
     public ArrayList<Escale> getEscales() {
         return escales;
     }
+    */
+
 
     /*
         public ArrayList<Reservation> getReservations() {
@@ -155,17 +156,21 @@ public class Vol {
 	public void setEtatVol(EtatVol etatVol) {
 		this.etatVol = etatVol;
 	}
-//    public void afficher() {
-//        DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
-//	    System.out.println("Vol de "+this.depart.getNom()+" "+this.date_depart.format(formatter)+
-//                            "\nvers "+this.arrivee.getNom()+" "+this.date_arrivee.format(formatter)
-//        );
-//        for (Escale e:this.escales)
-//        { System.out.println( e.afficher() );}
-//        System.out.println(this.etatVol.toString());
-//        for (Reservation r:this.reservations)
-//        { System.out.println( r.afficher() );}
-//}
+
+
+    public void afficher() {
+        DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
+	    System.out.println("Vol de "+this.trajet.getAeroport_dpart().getNom()+" "+this.date_depart.format(formatter)+
+                            "\nvers "+this.trajet.getAeroport_arrivee().getNom()+" "+this.date_arrivee.format(formatter)
+        );
+        for (Escale e:this.trajet.getEscales())
+        { System.out.println( e.afficher() );}
+        System.out.println(this.etatVol.toString());
+        for (Reservation r:this.reservations)
+        { System.out.println( r.afficher() );}
+}
+
+
     @Override
     public String toString() {
         return "Vol de " + compagnie+

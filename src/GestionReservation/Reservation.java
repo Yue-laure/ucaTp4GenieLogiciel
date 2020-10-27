@@ -13,28 +13,22 @@ public class Reservation {
     private Client client;
     private Vol vol;
     private boolean confirmation=false;
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 
 
     public Reservation(Client client,Passager passager,Vol vol) {
         next++;
         this.numero = String.valueOf(next);
-        this.passager = passager;
         this.client = client;
+        this.passager = passager;
         this.vol=vol;
-<<<<<<< Updated upstream
+
         date=ZonedDateTime.now(ZoneId.of("UTC"));
         client.addReservationFromReservationClass(this);
         passager.addReservationFromReservationClass(this);
         vol.addReservationFromReservationClass(this);
-=======
         date=date.now(ZoneId.of("UTC"));
         client.addReservation(this);
-        vol.addReservation(this);
->>>>>>> Stashed changes
     }
     public Reservation(Client client,Vol vol) {
         //le client reserve pour lui meme
@@ -44,15 +38,13 @@ public class Reservation {
         Passager pasager=new Passager(client.getNom());
         this.passager = pasager;
         this.vol=vol;
-<<<<<<< Updated upstream
+
         date=ZonedDateTime.now(ZoneId.of("UTC"));
         client.addReservationFromReservationClass(this);
         pasager.addReservationFromReservationClass(this);
         vol.addReservationFromReservationClass(this);
-=======
         date=date.now(ZoneId.of("UTC"));
         client.addReservation(this);
->>>>>>> Stashed changes
     }
 
 	public String afficher() {

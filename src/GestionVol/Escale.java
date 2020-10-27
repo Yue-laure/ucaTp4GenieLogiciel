@@ -15,30 +15,29 @@ public class Escale {
 
     private Trajet trajet;
 
-    public  Escale(Trajet trajet,Duration date_atterrissage,Aeroport aeroport,Duration date_decollage)
-    {
-        this.vol=vol;
-        this.aeroport=aeroport;
-        this.date_atterrissage=date_atterrissage;
-        this.date_decollage=date_decollage;
-        if (vol.getEscales().isEmpty()){
-            vol.addEscalefromEscaleClass(this);
-            this.exists=true;
-        }
-        else{
-            for (Escale e:vol.getEscales()) {
-                if(!(
+    public  Escale(Trajet trajet,Duration date_atterrissage,Aeroport aeroport,Duration date_decollage) {
+        this.trajet = trajet;
+        this.aeroport = aeroport;
+        this.date_atterrissage = date_atterrissage;
+        this.date_decollage = date_decollage;
+        if (trajet.getEscales().isEmpty()) {
+            trajet.addEscalefromEscaleClass(this);
+            this.exists = true;
+        } else {
+            for (Escale e : trajet.getEscales()) {
+                if (!(
                         e.date_atterrissage.toString().equals(this.date_atterrissage.toString())
-                        && e.date_decollage.toString().equals(this.date_decollage.toString())
-                        && e.aeroport.getNom().equals(this.aeroport.getNom())
+                                && e.date_decollage.toString().equals(this.date_decollage.toString())
+                                && e.aeroport.getNom().equals(this.aeroport.getNom())
                 )) {
-                    this.exists=true;
+                    this.exists = true;
                 }
             }
-            if (exists){
-                vol.addEscalefromEscaleClass(this);
+            if (exists) {
+                trajet.addEscalefromEscaleClass(this);
             }
         }
+    }
 /*
 	  this.trajet=trajet;
 	  trajet.addEscalefromEscaleClass(this);
@@ -58,7 +57,7 @@ public class Escale {
 		return vol;
 	}
 	*/
-	public void setTrajet(Trajet trajet) {
+	public void setTrajet(Trajet trajet){
 		this.trajet = trajet;
 	}
 	/*
@@ -82,26 +81,11 @@ public class Escale {
 	}
 */
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Escale escale = (Escale) o;
-        return Objects.equals(date_atterrissage, escale.date_atterrissage) &&
-                Objects.equals(date_decollage, escale.date_decollage) &&
-                Objects.equals(aeroport, escale.aeroport) &&
-                Objects.equals(vol, escale.vol);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(date_atterrissage, date_decollage, aeroport, trajet);
-    }
-
-// ****   public String afficher() {
-// ***       DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
-// ***    return "escale en "+this.aeroport.getNom()+" de "+this.date_atterrissage.format(formatter)+" a "+this.date_decollage.format(formatter);
-//	}
+   public String afficher() {
+       DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
+    return "escale en "+this.aeroport.getNom()+" de "+this.date_atterrissage+" a "+this.date_decollage;
+	}
 
 
 }

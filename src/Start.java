@@ -1,6 +1,5 @@
 import GestionReservation.Client;
 import GestionReservation.Passager;
-import GestionReservation.Reservation;
 import GestionVol.*;
 
 import java.time.Duration;
@@ -22,56 +21,55 @@ public class Start {
         Aeroport PKX=new Aeroport("PKX",pekin);
 
 
-        ZonedDateTime dd=ZonedDateTime.of(2020, 01, 01, 07, 30, 0, 0, ZoneId.of("UTC"));
-        ZonedDateTime dea=ZonedDateTime.of(2020, 01, 01, 10, 30, 0, 0, ZoneId.of("UTC"));
-        ZonedDateTime ded=ZonedDateTime.of(2020, 01, 01, 11, 30, 0, 0, ZoneId.of("UTC"));
-        ZonedDateTime da=ZonedDateTime.of(2020, 01, 01, 13, 30, 0, 0, ZoneId.of("UTC"));
-        
         Duration dureeDepart =Duration.ofMinutes(0);
         Duration dureeArrivee =Duration.ofHours(2);
-        
-  //*****      Trajet trajet1=new Trajet(CMN,PKX,dureeDepart,dureeArrivee);
+        Trajet casa_pekin=new Trajet(CMN,PKX,dureeDepart,dureeArrivee);
 
-   //****     Vol vol = new Vol(AF,"1",dd,da,trajet1);
+        ZonedDateTime dd=ZonedDateTime.of(2020, 01, 01, 07, 30, 0, 0, ZoneId.of("UTC"));
+        ZonedDateTime da=ZonedDateTime.of(2020, 01, 01, 13, 30, 0, 0, ZoneId.of("UTC"));
+        ZonedDateTime dd2=ZonedDateTime.of(2020, 02, 01, 07, 30, 0, 0, ZoneId.of("UTC"));
+        ZonedDateTime da2=ZonedDateTime.of(2020, 02, 01, 13, 30, 0, 0, ZoneId.of("UTC"));
+        Vol vol = new Vol(AF,"1",dd,da,casa_pekin);
+        Vol volRegulier = new Vol(AF,"2",dd2,da2,casa_pekin);
 
-        vol.addEscale(dea,CDG,ded);
-        vol.addEscale(dea,CDG,ded);
-        Escale escaleParis=new Escale(vol,dea,CMN,ded);
-        //vol.addEscale(dea,CDG,ded);
-      //****  Escale escaleParis=new Escale(vol,dea,CDG,ded);
+
+        Duration dea=Duration.ofHours(3);
+        Duration ded=Duration.ofHours(4);
+        // On ajoute differentes instances du meme escale pour tester l uniciter
+        casa_pekin.addEscale(dea,CDG,ded);
+        casa_pekin.addEscale(dea,CDG,ded);
+        Escale escaleParis=new Escale(casa_pekin,dea,CDG,ded);
 
         Client ayoub =new Client("ayoub");
         Passager yue =new Passager("Yue");
 
+
+        System.out.println("Un Client AYOUB reserve pour lui et our un passager YUE un vol vers Pekin de Casablanca");
+        System.out.println("AYOUB reserve pour un autre Passager IMANE le meme vol mais du mois prochain pour qu elle  puisse les rejoindre");
+        System.out.println("------------------------------------------");
+        System.out.println("------------------------------------------");
+
         //Reservation reservation1=new Reservation(ayoub,vol);
         //Reservation reservation2=new Reservation(ayoub,yue,vol);
- //****       ayoub.reserve(vol);
-  //****      ayoub.reserve(yue,vol);
-        //ayoub.reserve("yue",vol);
+        ayoub.reserve(vol);
+        ayoub.reserve(yue,vol);
 
 
-  //****      vol.afficher();
+        volRegulier.setEtatVol(Vol.EtatVol.RETARDE);
+        ayoub.reserve("Imane",volRegulier);
+
+
+        vol.afficher();
+        System.out.println("------------------------------------------");
+        volRegulier.afficher();
+
 
         
         //Reservation res=new Reservation();
         
         System.out.println("hey Yue <3 :)");
 
-       /* System.out.println("VOL");
-        System.out.println("vol a :"+vol1.getDate_depart());
 
-
-        System.out.println("DOUBLE NAVIGABILITE");
-        System.out.println("les vols de AF: "+ AF.getPropose_vol());
-        System.out.println("les vols de RAM: "+ RAM.getPropose_vol());
-        System.out.println("la compagnie du vol1: "+ vol1.getCompagnie());
-        System.out.println("la compagnie du vol2: "+ vol2.getCompagnie());
-        System.out.println("la compagnie du vol3: "+ vol3.getCompagnie());
-
-
-        System.out.println("RESERVATION");
-        System.out.println("reservation "+res.getNumero()+" a : "+res.getDate());
-        */
 
     }
 }
