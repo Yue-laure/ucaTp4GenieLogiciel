@@ -40,11 +40,11 @@ public class Start {
         casa_pekin.addEscale(dea,CDG,ded);
         Escale escaleParis=new Escale(casa_pekin,dea,CDG,ded);
 
-        Client ayoub =new Client("ayoub");
+        Client ayoub =new Client("Ayoub");
         Passager yue =new Passager("Yue");
 
 
-        System.out.println("Un Client AYOUB reserve pour lui et our un passager YUE un vol vers Pekin de Casablanca");
+        System.out.println("Un Client AYOUB reserve pour lui et pour un passager YUE un vol vers Pekin de Casablanca");
         System.out.println("AYOUB reserve pour un autre Passager IMANE le meme vol mais du mois prochain pour qu elle  puisse les rejoindre");
         System.out.println("------------------------------------------");
         System.out.println("------------------------------------------");
@@ -64,9 +64,9 @@ public class Start {
         volRegulier.afficher();
 
 
-        
-        //Reservation res=new Reservation();
-        
+
+
+
         System.out.println("hey Yue <3 :)");
 
 
